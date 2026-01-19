@@ -17,3 +17,5 @@ jobs:
           base: header, community, repositories, metadata
           plugin_languages: yes
           plugin_achievements: yes
+          plugin_achievements_display: compact
+          plugin_achievements_threshold: C
