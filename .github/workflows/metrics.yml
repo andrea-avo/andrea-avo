@@ -39,16 +39,6 @@ jobs:
           # 5. Licenses (Overview lisensi proyek)
           plugin_licenses: yes
           plugin_licenses_setup: npm install
-
-          # 6. Coding Habits (Kebiasaan Coding & Jam Aktif)
-          plugin_habits: yes
-          plugin_habits_facts: yes
-          plugin_habits_charts: yes
-          
-          # 7. Achievements (Pencapaian & Badge otomatis)
-          plugin_achievements: yes
-          plugin_achievements_display: compact
-          plugin_achievements_threshold: C
           
           # Konfigurasi Tambahan
           config_timezone: Asia/Jakarta
