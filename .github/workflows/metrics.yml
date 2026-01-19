@@ -14,17 +14,25 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN }}
           user: andrea-avo
           template: classic
+          
+          # Base content (Followers & User Account Stats)
           base: header, community, repositories, metadata
           
-          # Fitur yang sudah ada
-          plugin_languages: yes
-          
-          # Fitur-fitur baru
-          plugin_habits: yes
-          plugin_habits_facts: yes
-          config_timezone: Asia/Jakarta
-          
+          # Isometric Commit Calendar (Tampilan 3D)
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
           
-          plugin_lines: yes
+          # Commit Calendar (Tampilan kalender standar)
+          plugin_calendar: yes
+          plugin_calendar_limit: 1
+          
+          # Repository Licenses (Menampilkan lisensi yang Anda gunakan)
+          plugin_licenses: yes
+          plugin_licenses_setup: npm install
+          
+          # Repository Traffic (Statistik pengunjung repo Anda)
+          plugin_traffic: yes
+
+          # Tambahan agar Bahasa tetap muncul
+          plugin_languages: yes
+          plugin_languages_sections: most-used
