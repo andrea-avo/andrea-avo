@@ -1,10 +1,7 @@
 name: Metrics
 on:
-  # Berjalan setiap 24 jam
   schedule: [{cron: "0 0 * * *"}]
-  # Memungkinkan dijalankan manual
   workflow_dispatch:
-  # Berjalan setiap ada perubahan di main
   push: {branches: ["master", "main"]}
 jobs:
   github-metrics:
@@ -17,33 +14,39 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN }}
           user: andrea-avo
           template: classic
+          
+          # Pengaturan Tampilan & Warna
+          config_display: columns         # Membagi tampilan jadi 2 kolom
+          config_timezone: Asia/Jakarta
+          config_padding: 0, 5%
+          
+          # 1. Base Stats
           base: header, community, repositories, metadata
           
-          # 1. Isometric Commit Calendar (Tampilan 3D)
+          # 2. Isometric Calendar (Hiasan 3D)
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
           
-          # 2. Languages (Bahasa pemrograman yang sering digunakan)
+          # 3. Languages (Dengan Animasi)
           plugin_languages: yes
           plugin_languages_sections: most-used
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_animations: yes
           
-          # 3. Repositories Traffic (Statistik pengunjung)
+          # 4. Habits (Grafik Aktivitas)
+          plugin_habits: yes
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+          
+          # 5. Achievements (Lencana/Badge)
+          plugin_achievements: yes
+          plugin_achievements_display: compact
+          
+          # 6. Traffic & People
           plugin_traffic: yes
-
-          # 4. People (Followers dengan foto avatar)
           plugin_people: yes
-          plugin_people_types: followers
+          plugin_people_types: followers, following
           plugin_people_limit: 28
-          plugin_people_size: 28
-
-          # 5. Licenses (Overview lisensi proyek)
-          plugin_licenses: yes
-          plugin_licenses_setup: npm install
-
-          # 6. Starred Topics (Ikon teknologi)
-          plugin_topics: yes
-          plugin_topics_mode: icons
-          plugin_topics_limit: 0
           
-          # Konfigurasi Tambahan
-          config_timezone: Asia/Jakarta
+          # 7. Licenses
+          plugin_licenses: yes
