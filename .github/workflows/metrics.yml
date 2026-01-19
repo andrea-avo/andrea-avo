@@ -1,7 +1,10 @@
 name: Metrics
 on:
+  # Berjalan setiap 24 jam
   schedule: [{cron: "0 0 * * *"}]
+  # Memungkinkan dijalankan manual
   workflow_dispatch:
+  # Berjalan setiap ada perubahan di main
   push: {branches: ["master", "main"]}
 jobs:
   github-metrics:
@@ -14,39 +17,38 @@ jobs:
           token: ${{ secrets.METRICS_TOKEN }}
           user: andrea-avo
           template: classic
-          
-          # Pengaturan Tampilan & Warna
-          config_display: columns         # Membagi tampilan jadi 2 kolom
-          config_timezone: Asia/Jakarta
-          config_padding: 0, 5%
-          
-          # 1. Base Stats
           base: header, community, repositories, metadata
           
-          # 2. Isometric Calendar (Hiasan 3D)
+          # 1. Isometric Commit Calendar (Tampilan 3D)
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
           
-          # 3. Languages (Dengan Animasi)
+          # 2. Languages (Bahasa pemrograman yang sering digunakan)
           plugin_languages: yes
           plugin_languages_sections: most-used
-          plugin_languages_details: bytes-size, percentage
-          plugin_languages_animations: yes
           
-          # 4. Habits (Grafik Aktivitas)
+          # 3. Repositories Traffic (Statistik pengunjung)
+          plugin_traffic: yes
+
+          # 4. People (Followers & Following dengan foto avatar)
+          plugin_people: yes
+          plugin_people_types: followers, following
+          plugin_people_limit: 30
+          plugin_people_size: 30
+
+          # 5. Licenses (Overview lisensi proyek)
+          plugin_licenses: yes
+          plugin_licenses_setup: npm install
+
+          # 6. Coding Habits (Kebiasaan Coding & Jam Aktif)
           plugin_habits: yes
           plugin_habits_facts: yes
           plugin_habits_charts: yes
           
-          # 5. Achievements (Lencana/Badge)
+          # 7. Achievements (Pencapaian & Badge otomatis)
           plugin_achievements: yes
           plugin_achievements_display: compact
+          plugin_achievements_threshold: C
           
-          # 6. Traffic & People
-          plugin_traffic: yes
-          plugin_people: yes
-          plugin_people_types: followers, following
-          plugin_people_limit: 28
-          
-          # 7. Licenses
-          plugin_licenses: yes
+          # Konfigurasi Tambahan
+          config_timezone: Asia/Jakarta
