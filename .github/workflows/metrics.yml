@@ -19,19 +19,19 @@ jobs:
           base: header, community, repositories, metadata
           config_timezone: Asia/Jakarta
 
-          # 1. Statistik Pengunjung (Traffic)
+          # 1. Statistik Pengunjung
           plugin_traffic: yes
 
-          # 2. Isometric Commit Calendar (Tampilan 3D)
+          # 2. Isometric Commit Calendar
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
 
-          # 3. Bahasa Pemrograman (Most Used)
+          # 3. Bahasa Pemrograman
           plugin_languages: yes
           plugin_languages_details: bytes-size, percentage
-          plugin_languages_sections: most-used
+          plugin_languages_sections: all
           
-          # 4. People (Followers & Following)
+          # 4. People
           plugin_people: yes
           plugin_people_types: followers, following
           plugin_people_limit: 30
