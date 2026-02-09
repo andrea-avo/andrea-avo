@@ -10,30 +10,29 @@ jobs:
     permissions:
       contents: write
     steps:
-      # 1. Checkout repository
-      - uses: actions/checkout@v4
-
-      # 2. Lowlighter Metrics
-      - name: General Metrics
-        uses: lowlighter/metrics@latest
+      - uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: andrea-avo
           template: classic
           base: header, community, repositories, metadata
           config_timezone: Asia/Jakarta
-          plugin_traffic: yes
+
+          # 1. Isometric Commit Calendar
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
+
+          # 2. Language Analytics 
+          plugin_languages: yes                       
+          plugin_languages_details: bytes-size, percentage, lines      
+          plugin_languages_sections: most-used
+          plugin_languages_limit: 20
+          
+          # 3. Penyesuaian Visual & Dark Mode
+          config_order: base.header, isocalendar, languages, base.community
+
+          # 4. Plugin tambahan Anda
+          plugin_traffic: yes
           plugin_people: yes
           plugin_people_types: followers, following
-          plugin_people_limit: 30
           plugin_licenses: yes
-
-      # 3. Language Analytics
-      - name: Update Language Statistics
-        uses: stefvuck/github-profile-language-analytics@v1.1.0
-        with:
-          github_token: ${{ secrets.METRICS_TOKEN }}
-          visualization_types: "leaderboard"
-          output_path: "stats"
