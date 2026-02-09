@@ -1,26 +1,32 @@
-name: Update Language Statistics
+name: Metrics
 on:
-  schedule:
-    - cron: "0 0 * * *"
+  schedule: [{cron: "0 0 * * *"}]
   workflow_dispatch:
-
-permissions:
-  contents: write
+  push: {branches: ["master", "main"]}
 
 jobs:
-  update-stats:
+  github-metrics:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Generate Language Analytics
-        uses: stefvuck/github-profile-language-analytics@v1.1.0
+      - uses: lowlighter/metrics@latest
         with:
-          github_token: ${{ secrets.STATS_TOKEN }}
-          visualization_types: "leaderboard"
-          output_path: "stats"
-          # Kosongkan exclude_languages agar SEMUA bahasa (termasuk HTML/CSS) ikut dihitung
-          exclude_languages: "" 
-          # Aktifkan Dark Mode sesuai keinginan Anda
-          dark_mode: "true"
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: andrea-avo
+          template: classic
+          base: header, community, repositories, metadata
+          config_timezone: Asia/Jakarta
+          plugin_traffic: yes
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          plugin_languages: yes
+          plugin_languages_details: bytes-size, percentage, lines
+          plugin_languages_sections: most-used
+          plugin_people: yes
+          plugin_people_types: followers, following
+          plugin_people_limit: 30
+          plugin_people_size: 30
+          plugin_people_shuffle: yes 
+          plugin_licenses: yes
+          plugin_licenses_ratio: yes 
