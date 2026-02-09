@@ -10,39 +10,26 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Step 1: Lowlighter Metrics (Tanpa plugin_languages agar tidak double)
-      - uses: lowlighter/metrics@latest
+      # 1. Step untuk Lowlighter Metrics (Classic)
+      - name: General Metrics
+        uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: andrea-avo
           template: classic
           base: header, community, repositories, metadata
           config_timezone: Asia/Jakarta
-
-          # 1. Statistik Pengunjung
           plugin_traffic: yes
-
-          # 2. Isometric Commit Calendar
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
-
-          # 4. People
           plugin_people: yes
           plugin_people_types: followers, following
           plugin_people_limit: 30
-          plugin_people_size: 30
-          plugin_people_shuffle: yes 
-
-          # 5. Licenses
           plugin_licenses: yes
-          plugin_licenses_ratio: yes
 
-      # Step 2: Language Analytics (Lines of Code - Dark Mode)
+      # 2. Step untuk Language Analytics (Lines of Code + Dark Mode)
       - name: GitHub Profile Language Analytics
         uses: jstet/github-profile-language-analytics@v2.4.0
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          # Konfigurasi sesuai permintaan: Lines of Code & Dark Mode
           search_type: languages
-          chart_type: bar
-          # Output file akan tersimpan sebagai github-profile-language-analytics.svg secara default
