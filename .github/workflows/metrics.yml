@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      # 1. Step untuk Lowlighter Metrics (Classic)
+      # 1. Lowlighter Metrics
       - name: General Metrics
         uses: lowlighter/metrics@latest
         with:
@@ -27,9 +27,8 @@ jobs:
           plugin_people_limit: 30
           plugin_licenses: yes
 
-      # 2. Step untuk Language Analytics (Lines of Code + Dark Mode)
+      # 2. Language Analytics (Sudah diperbaiki ke jstct)
       - name: GitHub Profile Language Analytics
-        uses: jstet/github-profile-language-analytics@v2.4.0
+        uses: jstct/github-profile-language-analytics@v2.4.0
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          search_type: languages
