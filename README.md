@@ -1,4 +1,2 @@
-<p align="center">
-  <img src="/github-metrics.svg" />
-  ![Language Analytics](./github-profile-language-analytics.svg)
-</p>
+![Language Stats](stats/leaderboard_by_lines_dark.png)
+![Metrics](github-metrics.svg)
