@@ -10,7 +10,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      # 1. Lowlighter Metrics
+      # 1. Checkout repository
+      - uses: actions/checkout@v4
+
+      # 2. Lowlighter Metrics
       - name: General Metrics
         uses: lowlighter/metrics@latest
         with:
@@ -27,8 +30,10 @@ jobs:
           plugin_people_limit: 30
           plugin_licenses: yes
 
-      # 2. Language Analytics (Sudah diperbaiki ke jstct)
-      - name: GitHub Profile Language Analytics
-        uses: jstct/github-profile-language-analytics@v2.4.0
+      # 3. Language Analytics
+      - name: Update Language Statistics
+        uses: stefvuck/github-profile-language-analytics@v1.1.0
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
+          github_token: ${{ secrets.METRICS_TOKEN }}
+          visualization_types: "leaderboard"
+          output_path: "stats"
